@@ -62,6 +62,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="/user/{{ Auth::user()->id }}">Profile</a>
+                                    </li>
+                                    <li>
                                         <a href="products/create">Create Product</a>
                                     </li>
                                     <li>

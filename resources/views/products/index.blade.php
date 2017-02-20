@@ -21,6 +21,7 @@
                                         <h4 class="media-heading">{{ $product->product_name }} <small>{{ $product->category }}</small></h4>
                                         {{ $product->product_description }}<br>
                                         Price: {{ number_format($product->amount, 2) }}<br>
+                                        Poser: {{ $product->user->name }}<br>
                                         <!-- <a href="/products/{{ $product->id }}" class="btn btn-warning">Edit</a>
                                         <form method="POST" action="/products/{{ $product->id }}">
                                             {{ method_field('DELETE') }}

@@ -40,6 +40,7 @@ Route::group(['middleware'=>'auth'], function() {
   Route::get('/products', 'ProductController@index');
   Route::get('/products/create', 'ProductController@create');
   Route::get('/products/{id}', 'ProductController@edit');
+  Route::get('/user/{id}', 'UserController@show');
   Route::put('/products/{id}', 'ProductController@update');
   Route::put('/products/{id}', 'ProductController@destroy');
   Route::post('/products', 'ProductController@store');
