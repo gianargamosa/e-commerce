@@ -36,6 +36,7 @@ Route::group(['middleware'=>'auth'], function() {
   Route::get('/', function () {
     return view('home');
   });
+  Route::get('/', 'ProductController@index');
   Route::get('/products', 'ProductController@index');
   Route::get('/products/create', 'ProductController@create');
   Route::get('/products/{id}', 'ProductController@edit');

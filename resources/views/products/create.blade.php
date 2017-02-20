@@ -4,6 +4,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Create Products</div>
                 <div class="panel-body">
@@ -12,20 +22,20 @@
                         <div class="form-group">
                             <label for="exampleInputFile">File Image</label>
                             <!-- <input type="file" id="exampleInputFile"> -->
-                            <input type="text" class="form-control" id="product_image" placeholder="Product Image" name="product_image">
+                            <input type="text" class="form-control" id="product_image" placeholder="Product Image" name="product_image" value="{{ old('product_image') }}">
                             <!-- <p class="help-block">5mb Max</p> -->
                         </div>
                         <div class="form-group">
                             <label for="product_name">Product Name</label>
-                            <input type="text" class="form-control" id="product_name" placeholder="Product Name" name="product_name">
+                            <input type="text" class="form-control" id="product_name" placeholder="Product Name" name="product_name" value="{{ old('product_name') }}">
                         </div>
                         <div class="form-group">
                             <label for="product_description">Product Description</label>
-                            <textarea class="form-control" id="product_description" placeholder="Product Description" name="product_description"></textarea>
+                            <textarea class="form-control" id="product_description" placeholder="Product Description" name="product_description">{{ old('product_description') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="product_description">Amount</label>
-                            <input type="text" class="form-control" id="amount" placeholder="Product Description" name="amount">
+                            <input type="text" class="form-control" id="amount" placeholder="Product Description" name="amount" value="{{ old('amount') }}">
                         </div>
                         <div class="form-group">
                             <label for="product_description">Category</label>

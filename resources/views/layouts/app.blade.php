@@ -54,7 +54,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li><a href="/shopping-cart">Cart - {{ Session::has('cart') ? Session::get('cart')->total_quantity : '' }} items</a></li>
+                            <li><a href="/shopping-cart">My Cart - {{ Session::has('cart') ? Session::get('cart')->total_quantity : '' }} items</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
