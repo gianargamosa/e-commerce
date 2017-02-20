@@ -19,11 +19,26 @@
                     </div>
                     <h3>My Items</h3>
                     <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        @foreach($products as $product)
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="{{ $product->product_image }}" alt="{{ $product->product_name }}" width="100px">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <span class="pull-right">
+                                            <a href="{{ route('notification.requesttoresell', ['product_id' => $product->id, 'user_id' => $product->user->id]) }}" class="btn btn-warning">Request To Re-sell</a>
+                                        </span>
+                                        {{ $product->product_name }} <small>{{ $product->category }}</small></h4>
+                                        {{ $product->product_description }}<br>
+                                        Price: {{ number_format($product->amount, 2) }}<br>
+                                        Poser: {{ $product->user->name }}<br>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

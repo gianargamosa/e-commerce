@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Products;
 use Illuminate\Http\Request;
+use App\Notifications;
 
-class UserController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +15,17 @@ class UserController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function requesttoresell(Request $request, $product_id, $user_id)
+    {
+        //
+        $notification = Notifications::create(['user_id' => $user_id, 'product_id' => $product_id]);
     }
 
     /**
@@ -48,9 +58,6 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        $users_data = User::find($id);
-        $products = Products::where('user_id', $users_data->id)->get();
-        return view('users.show', compact('users_data', 'products'));
     }
 
     /**

@@ -16,6 +16,12 @@ Route::get('/add-to-cart/{id}', [
   'as' => 'product.addtocart'
 ]);
 
+Route::get('/resell/{product_id}/{user_id}', [
+  'uses' => 'NotificationController@requesttoresell',
+  'as' => 'notification.requesttoresell'
+]);
+
+
 Route::get('/shopping-cart', [
   'uses' => 'ProductController@cart',
   'as' => 'product.shoppingcart'
@@ -36,6 +42,7 @@ Route::group(['middleware'=>'auth'], function() {
   Route::get('/', function () {
     return view('home');
   });
+  // Route::get('/resell/{product_id}/{user_id}', 'Notification@resell')
   Route::get('/', 'ProductController@index');
   Route::get('/products', 'ProductController@index');
   Route::get('/products/create', 'ProductController@create');

@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function user()
+    public function product()
     {
         return $this->hasMany('App\Products');
     }

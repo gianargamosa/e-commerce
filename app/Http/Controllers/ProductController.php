@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Products;
+use Auth;
 use Illuminate\Http\Request;
 use Session;
 
@@ -16,10 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
         $products = Products::all();
         return view('products.index', compact('products'));
-        // return $products;
 
     }
 
@@ -30,7 +29,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
         return view('products/create');
     }
 
@@ -41,17 +39,11 @@ class ProductController extends Controller
      */
     public function addtocart(Request $request, $id)
     {
-        //
         $products_data = Products::find($id);
-        // return $products_data;
         $old_cart = Session::has('cart') ? Session::get('cart') : null;
-
-
         $cart = new Cart($old_cart);
-        // return $cart;
         $cart->add($products_data, $products_data->id);
         $request->session()->put('cart', $cart);
-        // dd($request->session()->get('cart'));
         return redirect('/products');
     }
 
@@ -67,8 +59,6 @@ class ProductController extends Controller
         }
         $old_cart = Session::get('cart');
         $cart = new Cart($old_cart);
-        // dd($cart->items);
-        // return $cart->total_price;
         return view('shop.shopping-cart', ['products' => $cart->items, 'total_price' => $cart->total_price]);
     }
 
@@ -85,8 +75,6 @@ class ProductController extends Controller
         $old_cart = Session::get('cart');
         $cart = new Cart($old_cart);
         $total_price = $cart->total_price;
-        // dd($cart->items);
-        // return $cart->total_price;
         return view('shop.checkout', ['total_price' => $total_price]);
     }
 
@@ -98,22 +86,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
-
         $this->validate($request, [
             'product_name' => 'required', 
             'product_image' => 'required', 
             'product_description' => 'required', 
             'amount' => 'required', 
             'category' => 'required',
-            ]);
-
-
-        $products_data = $request->all();
-        Products::create($products_data);
-
-        
+        ]);
+        $user = Auth::user();
+        $user->product()->create($request->all());
         return redirect('/products');
     }
 
@@ -136,7 +117,6 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
         $products_data = Products::where('id', $id)->first();
         return view('products.edit')->with('products', $products_data);
     }
@@ -150,7 +130,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $products_data = Products::where('id', $id)->first();
         $products_data->update($request->all());
         return redirect('/products');
@@ -164,7 +143,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
         $products_data = Products::where('id', $id)->first();
         $products_data->delete();
         return redirect('/products');
